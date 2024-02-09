@@ -8,6 +8,37 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class AirportTest {
+  
+  @DisplayName("비즈니스 항공편이 하나 있다")
+  @Nested
+  class BusinessFlightTest {
+    private Flight businessFlight;
+    
+    @BeforeEach
+    void setUp() {
+      businessFlight = new Flight("2", "Business");
+    }
+    
+    @Test
+    public void testBusinessRegular() {
+      Passenger kim = new Passenger("김", false);
+      assertEquals(false, businessFlight.addPassenger(kim));
+      assertEquals(0, businessFlight.getPassengerList().size());
+      assertEquals(false, businessFlight.removePassenger(kim));
+      assertEquals(0, businessFlight.getPassengerList().size());
+    }
+    
+    @Test
+    public void testBusinessVip() {
+      Passenger lee = new Passenger("이", true);
+      assertEquals("2", businessFlight.getId());
+      assertEquals(true, businessFlight.addPassenger(lee));
+      assertEquals(1, businessFlight.getPassengerList().size());
+      assertEquals("이", businessFlight.getPassengerList().get(0).getName());
+      assertEquals(false, businessFlight.removePassenger(lee));
+      assertEquals(1, businessFlight.getPassengerList().size());
+    }
+  }
 
   @DisplayName("일반 항공편이 하나 있다")
   @Nested
