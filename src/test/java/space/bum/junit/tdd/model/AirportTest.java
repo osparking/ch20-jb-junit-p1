@@ -28,7 +28,17 @@ class AirportTest {
       assertEquals("김", economyFlight.getPassengerList().get(0).getName());
       assertEquals(true, economyFlight.removePassenger(kim));
       assertEquals(0, economyFlight.getPassengerList().size());
-
+    }
+    
+    @Test
+    public void testEconomyVip() {
+      Passenger lee = new Passenger("이", true);
+      assertEquals("1", economyFlight.getId());
+      assertEquals(true, economyFlight.addPassenger(lee));
+      assertEquals(1, economyFlight.getPassengerList().size());
+      assertEquals("이", economyFlight.getPassengerList().get(0).getName());
+      assertEquals(false, economyFlight.removePassenger(lee));
+      assertEquals(1, economyFlight.getPassengerList().size());
     }
   }
 
